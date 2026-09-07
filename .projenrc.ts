@@ -2,7 +2,7 @@ import { GemeenteNijmegenCdkApp } from '@gemeentenijmegen/projen-project-type';
 const project = new GemeenteNijmegenCdkApp({
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
-  devDeps: ['@gemeentenijmegen/projen-project-type@1.15.1'],
+  deps: ['@gemeentenijmegen/projen-project-type'],
   name: 'mijn-nijmegen-gemachtigd',
   projenrcTs: true,
 
