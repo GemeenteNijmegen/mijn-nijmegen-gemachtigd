@@ -1,12 +1,12 @@
 export class Statics {
-  static readonly projectName: string = 'mijn-nijmegen-gemachtigde';
-  static readonly sessionTableName: string = 'mijn-nijmegen-gemachtigde-sessions';
+  static readonly projectName: string = 'mijn-nijmegen-gemachtigd';
+  static readonly sessionTableName: string = 'mijn-nijmegen-gemachtigd-sessions';
 
   /**
    * Repo information
    */
 
-  static readonly repository: string = 'mijn-nijmegen-gemachtigde';
+  static readonly repository: string = 'mijn-nijmegen-gemachtigd';
   static readonly repositoryOwner: string = 'GemeenteNijmegen';
 
 
@@ -30,6 +30,31 @@ export class Statics {
     account: '740606269759',
     region: 'eu-central-1',
   };
+
+
+  // MARK: Mijn Nijmegen Gemachtigd infrastructure
+
+  /**
+ * DNS record name used for the API Gateway origin behind Mijn Nijmegen CloudFront.
+ */
+  static readonly apiOriginRecordName = 'gemachtigd-api';
+
+  /**
+ * SSM parameter containing the API Gateway origin domain used by Mijn Nijmegen CloudFront.
+ */
+  static readonly ssmCloudFrontOriginDomain = '/cdk/mijn-nijmegen-gemachtigd/cloudfront/origin-domain';
+
+
+  // TODO: willen we secret origin header vanuit Cloudfront? Of is het nu overkill in deze fase?
+  // /**
+  //  * Header used by Mijn Nijmegen CloudFront to identify requests to the Gemachtigd API.
+  //  */
+  // static readonly cloudFrontOriginHeaderName = 'x-mijn-nijmegen-origin';
+
+  // /**
+  //  * Secret used by Mijn Nijmegen CloudFront to authenticate requests to the Gemachtigd API.
+  //  */
+  // static readonly cloudFrontOriginSecretName = 'mijn-nijmegen-gemachtigd/cloudfront-origin-secret';
 
 
   // Mijn Nijmegen Statics
@@ -80,8 +105,8 @@ export class Statics {
   static readonly zaakAggregatorApiGatewayApiKey: string = '/cdk/mijn-nijmegen/zaken-api-key';
 
 
-  static readonly ssmMijnNijmegenZoneIdNew: string = '/cdk/mijn-nijmegen/zones/csp-id';
-  static readonly ssmMijnNijmegenZoneNameNew: string = '/cdk/mijn-nijmegen/zones/csp-name';
+  static readonly ssmMijnNijmegenZoneId: string = '/cdk/mijn-nijmegen/zones/csp-id';
+  static readonly ssmMijnNijmegenZoneName: string = '/cdk/mijn-nijmegen/zones/csp-name';
 
 
   // MARK: ZGW configuration
