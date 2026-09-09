@@ -4,7 +4,7 @@ import { ARecord, HostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { ApiGatewayv2DomainProperties } from 'aws-cdk-lib/aws-route53-targets';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
-import { Statics } from '../Statics';
+import { Statics } from '../../Statics';
 
 
 export class ApiInfrastructure extends Construct {

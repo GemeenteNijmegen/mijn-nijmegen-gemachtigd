@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/gemachtigd/static/styles/ds.css">
+  <link rel="stylesheet" href="/gemachtigd/static/styles/screen.css">
+  <title>{{title}} - Mijn Nijmegen Gemachtigd</title>
+</head>
+<body class="utrecht-document nijmegen-theme">
+{{>header}}
+<div class="utrecht-page-body nijmegen-padding-block-start-200 nijmegen-padding-block-end-400">
+  <div class="utrecht-page-body__content nijmegen-container-xxl">
+    <div class="nijmegen-grid">
+    {{#loggedIn}}
+      <div class="sidenav-wrapper nijmegen-g-col-lg-2 nijmegen-g-start-lg-0 nijmegen-g-col-2">
+      {{>navigation}}
+      </div>
+      <div class="nijmegen-g-col-lg-10 nijmegen-g-start-lg-3 nijmegen-g-col-12">
+    {{/loggedIn}}
+    {{^loggedIn}}
+      <div class="nijmegen-g-col-lg-8 nijmegen-g-start-lg-3 nijmegen-g-col-12">
+    {{/loggedIn}}
+      <main id="main-content">
+        {{{content}}}
+      </main>
+      </div>
+    </div>
+  </div>
+</div>
+{{>footer}}
+<script src="/gemachtigd/static/js/web-components/nijmegen-header.js" defer></script>
+<script src="/gemachtigd/static/js/web-components/nijmegen-mobile-menu.js" defer></script>
+<script src="/gemachtigd/static/js/web-components/nijmegen-toolbar-button.js" defer></script>
+</body>
+</html>

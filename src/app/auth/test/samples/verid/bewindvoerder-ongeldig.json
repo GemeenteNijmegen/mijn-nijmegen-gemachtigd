@@ -1,0 +1,6 @@
+{
+  "identifier": "sample-machtiging-003",
+  "type": "bewindvoering",
+  "clientBsn": "999999999",
+  "scopes": ["BWBR0015703:read", "BWBR0003850:read"]
+}

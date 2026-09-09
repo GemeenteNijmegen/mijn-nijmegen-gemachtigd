@@ -133,7 +133,7 @@
       "type": "build"
     },
     {
-      "name": "chokidar",
+      "name": "aws-sdk-client-mock",
       "type": "build"
     },
     {
@@ -192,10 +192,6 @@
       "type": "runtime"
     },
     {
-      "name": "@aws-sdk/client-secrets-manager",
-      "type": "runtime"
-    },
-    {
       "name": "@aws-sdk/lib-dynamodb",
       "type": "runtime"
     },
@@ -216,12 +212,20 @@
       "type": "runtime"
     },
     {
+      "name": "@gemeentenijmegen/utils",
+      "type": "runtime"
+    },
+    {
       "name": "@ver-id/node-client",
       "type": "runtime"
     },
     {
       "name": "aws-cdk-lib",
       "version": "^2.1.0",
+      "type": "runtime"
+    },
+    {
+      "name": "chokidar",
       "type": "runtime"
     },
     {

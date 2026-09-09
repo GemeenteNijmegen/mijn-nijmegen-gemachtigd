@@ -1,0 +1,7 @@
+{
+  "identifier": "sample-machtiging-002",
+  "type": "bewindvoering",
+  "clientBsn": "999995678",
+  "kvkNumber": "87654321",
+  "scopes": ["BWBR0015703:read"]
+}

@@ -35,7 +35,9 @@
     "moduleResolution": "nodenext",
     "typeRoots": [
       "./node_modules/@types"
-    ]
+    ],
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*.ts"

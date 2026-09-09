@@ -1,0 +1,13 @@
+{
+  "identifier": "sample-machtiging-001",
+  "type": "bewindvoering",
+  "clientBsn": "999991234",
+  "kvkNumber": "12345678",
+  "scopes": [
+    "BWBR0015703:read",
+    "BWBR0015703:write",
+    "BWBR0015703:payout",
+    "BWBR0015703:correspondence",
+    "BWBR0003850:read"
+  ]
+}

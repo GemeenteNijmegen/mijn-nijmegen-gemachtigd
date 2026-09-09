@@ -1,0 +1,47 @@
+<nijmegen-header>
+  <div class="nijmegen-header__content--small">
+    <div class="nijmegen-header__content--small--inner">
+      {{#loggedIn}}
+      <button
+        class="nijmegen-toolbar-button nijmegen-toolbar-button--icon-menu"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Menu openen"
+      >Menu</button>
+      {{/loggedIn}}
+      <a class="brand" href="/gemachtigd/home">Mijn Nijmegen Gemachtigd</a>
+    </div>
+    {{#loggedIn}}
+    <div id="mobile-menu" class="nijmegen-header__mobile-menu">
+      <nijmegen-mobile-menu>
+        <ul class="nijmegen-mobile-menu__list">
+          <li>
+            <a href="#" class="nijmegen-mobile-menu__link nijmegen-mobile-menu__link--strong">
+              <span>Taken</span>
+            </a>
+          </li>
+        </ul>
+        <div class="nijmegen-mobile-menu__separator"><hr class="utrecht-separator"></div>
+        <ul class="nijmegen-mobile-menu__list">
+          <li>
+            <a href="/gemachtigd/logout" class="nijmegen-mobile-menu__link nijmegen-mobile-menu__link--strong">
+              <span>Uitloggen</span>
+            </a>
+          </li>
+        </ul>
+      </nijmegen-mobile-menu>
+    </div>
+    {{/loggedIn}}
+  </div>
+  <div class="nijmegen-header__content">
+    <div class="nijmegen-header__content--inner">
+      <a class="brand" href="/gemachtigd/home">Mijn Nijmegen Gemachtigd</a>
+      <nav></nav>
+      {{#loggedIn}}
+      <a class="nijmegen-header-item" href="/gemachtigd/logout">Uitloggen</a>
+      {{/loggedIn}}
+    </div>
+  </div>
+  <div class="nijmegen-header__backdrop"></div>
+</nijmegen-header>

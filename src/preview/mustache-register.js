@@ -1,0 +1,7 @@
+'use strict';
+const fs = require('fs');
+
+require.extensions['.mustache'] = function (module, filename) {
+  const content = fs.readFileSync(filename, 'utf8');
+  module.exports = content;
+};

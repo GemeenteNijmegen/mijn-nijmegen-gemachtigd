@@ -7,6 +7,7 @@ import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 import { AppStage } from './AppStage';
 import { Configurable } from './Configuration';
+import { ParameterStage } from './Parameters';
 import { Statics } from './Statics';
 
 export interface PipelineStackProps extends StackProps, Configurable { }
@@ -37,12 +38,12 @@ export class PipelineStack extends Stack {
 
     const pipeline = this.pipeline(source, props);
 
-    // Parameter stage
-    // const parameters = new ParameterStage(this, `${Statics.projectName}-parameters`, {
-    //   env: props.configuration.deploymentEnvironment,
-    //   configuration: props.configuration,
-    // });
-    // pipeline.addStage(parameters);
+
+    const parameters = new ParameterStage(this, `${Statics.projectName}-parameters`, {
+      env: props.configuration.deploymentEnvironment,
+      configuration: props.configuration,
+    });
+    pipeline.addStage(parameters);
 
     // API stage
     const api = new AppStage(this, Statics.projectName, {

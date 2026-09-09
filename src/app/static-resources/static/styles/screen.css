@@ -1,0 +1,47 @@
+/* App-specifieke stijl zonder NLDS-equivalent. Geen regels op nijmegen- of utrecht- classes hier. */
+
+.brand {
+  color: var(--nijmegen-header-item-color, #282828);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-decoration: none;
+}
+
+/*
+ * Sticky footer: zonder dit staat de footer op een korte pagina meteen onder de content, met
+ * lege ruimte erna tot onderaan het scherm. footer is een direct kind van body (layout.mustache
+ * sluit de page-body/grid-divs zelf af voordat footer wordt gerenderd), dus margin-top: auto op
+ * de footer is voldoende.
+ */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+main#main-content {
+  display: block;
+  padding-block: 1.5rem;
+}
+
+/*
+ * Verberg de sidenav onder dezelfde breedte waarop de header zelf omschakelt naar het mobiele
+ * menu (nijmegen-mobile-menu, die dezelfde link al toont). Zonder dit blijft de sidenav op mobiel
+ * als een te smalle grid-kolom staan, dubbelop met het hamburgermenu.
+ *
+ * 1024px is niet een van de NLDS-grid-breakpoints (--nijmegen-breakpoint-sm/md/lg/xl/xxl:
+ * 576/768/992/1200/1400px). De header schakelt zelf hardcoded bij `width < 1024px`
+ * (.nijmegen-header__content / .nijmegen-header__content--small in ds.css), los van die
+ * grid-tokens, en er is geen kant-en-klare show/hide utility-class voor. Aansluiten bij het
+ * dichtstbijzijnde grid-breakpoint (lg, 992px) zou een gat van 992-1023px geven waarin geen van
+ * beide zichtbaar is.
+ */
+@media (width < 1024px) {
+  .sidenav-wrapper {
+    display: none;
+  }
+}

@@ -47,6 +47,12 @@ export class Statics {
    */
   static readonly ssmStaticResourcesBucketArn ='/cdk/mijn-nijmegen-gemachtigd/statics/bucket-arn';
 
+  /**
+   * VerID disclosure config (issuerUri, clientId, redirectUri) em secret.
+   */
+  static readonly ssmVerIdDisclosureConfig = '/cdk/mijn-nijmegen-gemachtigd/verid/disclosure/config';
+  static readonly veridDisclosureCredentialsSecretName = 'mijn-nijmegen-gemachtigd/verid/disclosure/credentials';
+
   // TODO: willen we secret origin header vanuit Cloudfront? Of is het nu overkill in deze fase?
   // /**
   //  * Header used by Mijn Nijmegen CloudFront to identify requests to the Gemachtigd API.

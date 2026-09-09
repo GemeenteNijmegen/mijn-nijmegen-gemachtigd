@@ -70,7 +70,195 @@
     },
     "bundle": {
       "name": "bundle",
-      "description": "Prepare assets"
+      "description": "Prepare assets",
+      "steps": [
+        {
+          "spawn": "bundle:app/auth/auth.lambda"
+        },
+        {
+          "spawn": "bundle:app/home/home.lambda"
+        },
+        {
+          "spawn": "bundle:app/login/login.lambda"
+        },
+        {
+          "spawn": "bundle:app/logout/logout.lambda"
+        }
+      ]
+    },
+    "bundle:app/auth/auth.lambda": {
+      "name": "bundle:app/auth/auth.lambda",
+      "description": "Create a JavaScript bundle from src/app/auth/auth.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/auth/auth.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/auth/auth.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text"
+          ]
+        }
+      ]
+    },
+    "bundle:app/auth/auth.lambda:watch": {
+      "name": "bundle:app/auth/auth.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/app/auth/auth.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/auth/auth.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/auth/auth.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text",
+            "--watch"
+          ]
+        }
+      ]
+    },
+    "bundle:app/home/home.lambda": {
+      "name": "bundle:app/home/home.lambda",
+      "description": "Create a JavaScript bundle from src/app/home/home.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/home/home.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/home/home.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text"
+          ]
+        }
+      ]
+    },
+    "bundle:app/home/home.lambda:watch": {
+      "name": "bundle:app/home/home.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/app/home/home.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/home/home.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/home/home.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text",
+            "--watch"
+          ]
+        }
+      ]
+    },
+    "bundle:app/login/login.lambda": {
+      "name": "bundle:app/login/login.lambda",
+      "description": "Create a JavaScript bundle from src/app/login/login.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/login/login.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/login/login.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text"
+          ]
+        }
+      ]
+    },
+    "bundle:app/login/login.lambda:watch": {
+      "name": "bundle:app/login/login.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/app/login/login.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/login/login.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/login/login.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text",
+            "--watch"
+          ]
+        }
+      ]
+    },
+    "bundle:app/logout/logout.lambda": {
+      "name": "bundle:app/logout/logout.lambda",
+      "description": "Create a JavaScript bundle from src/app/logout/logout.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/logout/logout.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/logout/logout.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text"
+          ]
+        }
+      ]
+    },
+    "bundle:app/logout/logout.lambda:watch": {
+      "name": "bundle:app/logout/logout.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/app/logout/logout.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/logout/logout.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/logout/logout.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text",
+            "--watch"
+          ]
+        }
+      ]
+    },
+    "bundle:copy-web-components": {
+      "name": "bundle:copy-web-components",
+      "description": "Copy NLDS web component bundles to static/js/web-components/, CSS-injectie eruit voor de CSP",
+      "steps": [
+        {
+          "exec": "node scripts/strip-web-component-css.mjs"
+        }
+      ]
+    },
+    "bundle:css-bundle": {
+      "name": "bundle:css-bundle",
+      "description": "Bundle design system CSS into ds.css",
+      "steps": [
+        {
+          "exec": "esbuild ./src/app/static-resources/static/styles/ds-input.js --bundle --target=node22 --platform=node --outfile=./src/app/static-resources/static/styles/ds.js --loader:.css=css --loader:.woff2=file --loader:.woff=file --asset-names=[name] --external:*source-sans-pro-cyrillic-ext-400-normal.woff2 --external:*source-sans-pro-cyrillic-ext-400-normal.woff --sourcemap"
+        }
+      ]
     },
     "cfn-lint": {
       "name": "cfn-lint",
@@ -128,7 +316,15 @@
     },
     "compile": {
       "name": "compile",
-      "description": "Only compile"
+      "description": "Only compile",
+      "steps": [
+        {
+          "spawn": "bundle:css-bundle"
+        },
+        {
+          "spawn": "bundle:copy-web-components"
+        }
+      ]
     },
     "default": {
       "name": "default",
@@ -276,6 +472,36 @@
       "name": "pre-compile",
       "description": "Prepare the project for compilation"
     },
+    "preview": {
+      "name": "preview",
+      "description": "Render preview HTML for all pages once",
+      "steps": [
+        {
+          "spawn": "bundle:css-bundle"
+        },
+        {
+          "spawn": "bundle:copy-web-components"
+        },
+        {
+          "exec": "ts-node -P tsconfig.json --transpile-only -r ./src/preview/mustache-register.js ./src/preview/render-previews.ts"
+        }
+      ]
+    },
+    "preview:watch": {
+      "name": "preview:watch",
+      "description": "Watch templates and re-render preview HTML on changes",
+      "steps": [
+        {
+          "spawn": "bundle:css-bundle"
+        },
+        {
+          "spawn": "bundle:copy-web-components"
+        },
+        {
+          "exec": "ts-node -P tsconfig.json --transpile-only -r ./src/preview/mustache-register.js ./src/preview/watch.ts"
+        }
+      ]
+    },
     "release": {
       "name": "release",
       "description": "Prepare a release from \"main\" branch",
@@ -392,7 +618,7 @@
             "--peer",
             "--no-deprecated",
             "--dep=dev,prod,peer,optional",
-            "--filter=@gemeentenijmegen/components-css,@gemeentenijmegen/design-tokens,@gemeentenijmegen/font,@gemeentenijmegen/layout-css,@gemeentenijmegen/semantic-html,@gemeentenijmegen/web-components,@types/aws-lambda,@types/jest,@types/mustache,@types/node,@utrecht/page-body-css,@utrecht/pre-heading-css,@utrecht/rich-text-css,chokidar,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-sdk/client-dynamodb,@aws-sdk/client-secrets-manager,@aws-sdk/lib-dynamodb,@gemeentenijmegen/apigateway-http,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@gemeentenijmegen/session,@ver-id/node-client,mustache,zod"
+            "--filter=@gemeentenijmegen/components-css,@gemeentenijmegen/design-tokens,@gemeentenijmegen/font,@gemeentenijmegen/layout-css,@gemeentenijmegen/semantic-html,@gemeentenijmegen/web-components,@types/aws-lambda,@types/jest,@types/mustache,@types/node,@utrecht/page-body-css,@utrecht/pre-heading-css,@utrecht/rich-text-css,aws-sdk-client-mock,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-sdk/client-dynamodb,@aws-sdk/lib-dynamodb,@gemeentenijmegen/apigateway-http,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@gemeentenijmegen/session,@gemeentenijmegen/utils,@ver-id/node-client,chokidar,mustache,zod"
           ]
         },
         {
@@ -431,7 +657,7 @@
             "@utrecht/pre-heading-css",
             "@utrecht/rich-text-css",
             "aws-cdk",
-            "chokidar",
+            "aws-sdk-client-mock",
             "commit-and-tag-version",
             "esbuild",
             "eslint-import-resolver-typescript",
@@ -445,14 +671,15 @@
             "typescript",
             "@aws-lambda-powertools/logger",
             "@aws-sdk/client-dynamodb",
-            "@aws-sdk/client-secrets-manager",
             "@aws-sdk/lib-dynamodb",
             "@gemeentenijmegen/apigateway-http",
             "@gemeentenijmegen/aws-constructs",
             "@gemeentenijmegen/projen-project-type",
             "@gemeentenijmegen/session",
+            "@gemeentenijmegen/utils",
             "@ver-id/node-client",
             "aws-cdk-lib",
+            "chokidar",
             "constructs",
             "mustache",
             "zod"

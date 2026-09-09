@@ -1,8 +1,9 @@
 import { PermissionsBoundaryAspect } from '@gemeentenijmegen/aws-constructs';
-import { Aspects, Stage, StageProps } from 'aws-cdk-lib';
+import { Aspects, Stage, StageProps, Tags } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { AppStack as AppStack } from './AppStack';
 import { Configurable } from './Configuration';
+import { Statics } from './Statics';
 
 interface MainStageProps extends StageProps, Configurable { }
 
@@ -13,6 +14,7 @@ export class AppStage extends Stage {
 
   constructor(scope: Construct, id: string, props: MainStageProps) {
     super(scope, id, props);
+    Tags.of(this).add('Project', Statics.projectName);
     Aspects.of(this).add(new PermissionsBoundaryAspect());
 
     /**
