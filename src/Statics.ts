@@ -35,15 +35,17 @@ export class Statics {
   // MARK: Mijn Nijmegen Gemachtigd infrastructure
 
   /**
- * DNS record name used for the API Gateway origin behind Mijn Nijmegen CloudFront.
- */
+   * DNS record name used for the API Gateway origin behind Mijn Nijmegen CloudFront.
+   */
   static readonly apiOriginRecordName = 'gemachtigd-api';
-
   /**
- * SSM parameter containing the API Gateway origin domain used by Mijn Nijmegen CloudFront.
- */
+   * SSM parameter containing the API Gateway origin domain used by Mijn Nijmegen CloudFront.
+   */
   static readonly ssmCloudFrontOriginDomain = '/cdk/mijn-nijmegen-gemachtigd/cloudfront/origin-domain';
-
+  /**
+   * SSM param with statics bucketname. Used by Mijn Nijmegen Cloudfront.
+   */
+  static readonly ssmStaticResourcesBucketArn ='/cdk/mijn-nijmegen-gemachtigd/statics/bucket-arn';
 
   // TODO: willen we secret origin header vanuit Cloudfront? Of is het nu overkill in deze fase?
   // /**
@@ -59,6 +61,14 @@ export class Statics {
 
   // Mijn Nijmegen Statics
 
+  /**
+   * Mijn Nijmegen Cloudfront
+   * Nodig om de S3 statics bucket te verbinden van gemachtigd
+   */
+
+  static readonly ssmMijnNijmegenCloudFrontDistributionArn = '/cdk/mijn-nijmegen/cloudfront/distribution-arn';
+  static readonly ssmMijnNijmegenCloudFrontDistributionId = '/cdk/mijn-nijmegen/cloudfront/distribution-id';
+  static readonly ssmMijnNijmegenCloudFrontDomainName = '/cdk/mijn-nijmegen/cloudfront/domain-name';
 
   /**
    * KMS key used for session table in Mijn Nijmegen
