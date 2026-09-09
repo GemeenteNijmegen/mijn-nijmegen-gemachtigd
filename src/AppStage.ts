@@ -19,7 +19,7 @@ export class AppStage extends Stage {
      * Main stack of this project
      * TODO you probably want to rename this stack
      */
-    new AppStack(this, 'stack', { // Translates to mijn-services-stack
+    new AppStack(this, 'app-stack', { // Translates to mijn-services-stack
       env: props.configuration.deploymentEnvironment,
       configuration: props.configuration,
     });

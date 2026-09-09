@@ -1,12 +1,12 @@
 export class Statics {
-  static readonly projectName: string = 'mijn-nijmegen-gemachtigde';
-  static readonly sessionTableName: string = 'mijn-nijmegen-gemachtigde-sessions';
+  static readonly projectName: string = 'mijn-nijmegen-gemachtigd';
+  static readonly sessionTableName: string = 'mijn-nijmegen-gemachtigd-sessions';
 
   /**
    * Repo information
    */
 
-  static readonly repository: string = 'mijn-nijmegen-gemachtigde';
+  static readonly repository: string = 'mijn-nijmegen-gemachtigd';
   static readonly repositoryOwner: string = 'GemeenteNijmegen';
 
 
@@ -32,8 +32,43 @@ export class Statics {
   };
 
 
+  // MARK: Mijn Nijmegen Gemachtigd infrastructure
+
+  /**
+   * DNS record name used for the API Gateway origin behind Mijn Nijmegen CloudFront.
+   */
+  static readonly apiOriginRecordName = 'gemachtigd-api';
+  /**
+   * SSM parameter containing the API Gateway origin domain used by Mijn Nijmegen CloudFront.
+   */
+  static readonly ssmCloudFrontOriginDomain = '/cdk/mijn-nijmegen-gemachtigd/cloudfront/origin-domain';
+  /**
+   * SSM param with statics bucketname. Used by Mijn Nijmegen Cloudfront.
+   */
+  static readonly ssmStaticResourcesBucketArn ='/cdk/mijn-nijmegen-gemachtigd/statics/bucket-arn';
+
+  // TODO: willen we secret origin header vanuit Cloudfront? Of is het nu overkill in deze fase?
+  // /**
+  //  * Header used by Mijn Nijmegen CloudFront to identify requests to the Gemachtigd API.
+  //  */
+  // static readonly cloudFrontOriginHeaderName = 'x-mijn-nijmegen-origin';
+
+  // /**
+  //  * Secret used by Mijn Nijmegen CloudFront to authenticate requests to the Gemachtigd API.
+  //  */
+  // static readonly cloudFrontOriginSecretName = 'mijn-nijmegen-gemachtigd/cloudfront-origin-secret';
+
+
   // Mijn Nijmegen Statics
 
+  /**
+   * Mijn Nijmegen Cloudfront
+   * Nodig om de S3 statics bucket te verbinden van gemachtigd
+   */
+
+  static readonly ssmMijnNijmegenCloudFrontDistributionArn = '/cdk/mijn-nijmegen/cloudfront/distribution-arn';
+  static readonly ssmMijnNijmegenCloudFrontDistributionId = '/cdk/mijn-nijmegen/cloudfront/distribution-id';
+  static readonly ssmMijnNijmegenCloudFrontDomainName = '/cdk/mijn-nijmegen/cloudfront/domain-name';
 
   /**
    * KMS key used for session table in Mijn Nijmegen
@@ -80,8 +115,8 @@ export class Statics {
   static readonly zaakAggregatorApiGatewayApiKey: string = '/cdk/mijn-nijmegen/zaken-api-key';
 
 
-  static readonly ssmMijnNijmegenZoneIdNew: string = '/cdk/mijn-nijmegen/zones/csp-id';
-  static readonly ssmMijnNijmegenZoneNameNew: string = '/cdk/mijn-nijmegen/zones/csp-name';
+  static readonly ssmMijnNijmegenZoneId: string = '/cdk/mijn-nijmegen/zones/csp-id';
+  static readonly ssmMijnNijmegenZoneName: string = '/cdk/mijn-nijmegen/zones/csp-name';
 
 
   // MARK: ZGW configuration
