@@ -1,4 +1,4 @@
-import { AWS, Bsn } from '@gemeentenijmegen/utils';
+import { AWS } from '@gemeentenijmegen/utils';
 import { logger } from '../../observability/Logger';
 
 
@@ -52,7 +52,7 @@ export class ZakenAggregatorConnector {
     return this.apiKey;
   }
 
-  async fetch(endpoint: string, userBsn: Bsn, params?: URLSearchParams) {
+  async fetch(endpoint: string, userBsn: string, params?: URLSearchParams) {
     const url = this.createUrlForRequest(endpoint, userBsn, params);
     try {
       const response = await fetch(url, {
@@ -90,12 +90,12 @@ export class ZakenAggregatorConnector {
     }
   }
 
-  private createUrlForRequest(endpoint: string, userBsn: Bsn, params?: URLSearchParams) {
+  private createUrlForRequest(endpoint: string, userBsn: string, params?: URLSearchParams) {
     const url = new URL(this.baseUrl);
     url.pathname = endpoint;
     const allParams = new URLSearchParams({
       userType: 'person',
-      userIdentifier: userBsn.bsn,
+      userIdentifier: userBsn,
     });
     if (params) {
       for (let [key, val] of params.entries()) {
