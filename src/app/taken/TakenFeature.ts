@@ -1,14 +1,14 @@
 import { HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Tracing } from 'aws-cdk-lib/aws-lambda';
-import { Construct } from 'constructs';
-
 import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
+import { Construct } from 'constructs';
+
+import { TakenFunction } from './taken-function';
 import { SessionsTable } from '../../infrastructure/SessionsTable';
 import { applyPageLambdaDefaults, createLambdaLogGroup } from '../../infrastructure/shared/PageLambda';
 import { Statics } from '../../Statics';
-import { TakenFunction } from './taken-function';
 
 interface TakenFeatureProps {
   httpApi: HttpApi;

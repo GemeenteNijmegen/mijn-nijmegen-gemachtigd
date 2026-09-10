@@ -1,8 +1,7 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
-import { Statics } from '../../Statics';
-import homeTemplate from './templates/home.mustache';
 import { render } from '../shared/ui/render';
+import homeTemplate from './templates/home.mustache';
 
 export interface HomeRequestHandlerProps {
   session?: Session;
@@ -13,7 +12,7 @@ export class HomeRequestHandler {
 
   async handleRequest(): Promise<ApiGatewayV2Response> {
     if (!this.props.session?.isLoggedIn()) {
-      return Response.redirect(Statics.basePath + '/login');
+      return Response.redirect('/login');
     }
 
     const scopesValue: string = this.props.session.getValue('scopes') ?? '';

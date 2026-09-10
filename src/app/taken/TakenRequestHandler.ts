@@ -1,14 +1,13 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
 import { Bsn, environmentVariables } from '@gemeentenijmegen/utils';
-import { logger } from '../../observability/Logger';
-import { Statics } from '../../Statics';
-import { render } from '../shared/ui/render';
-import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 import { TaakSummariesResponseSchema } from './TaakSchema';
 import { EventParams } from './taken.lambda';
 import taakTemplate from './templates/taak.mustache';
 import takenTemplate from './templates/taken.mustache';
+import { logger } from '../../observability/Logger';
+import { render } from '../shared/ui/render';
+import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 
 export interface TakenRequestHandlerProps {
   session?: Session;
@@ -28,7 +27,7 @@ export class TakenRequestHandler {
 
   async handleRequest(params: EventParams): Promise<ApiGatewayV2Response> {
     if (!this.props.session?.isLoggedIn()) {
-      return Response.redirect(Statics.basePath + '/login');
+      return Response.redirect('/login');
     }
     if (!params.taakId) {
       return this.list(params);
@@ -41,7 +40,7 @@ export class TakenRequestHandler {
     let taken;
     const isJson = params.responseType == 'json';
 
-    const timeout = isJson ? 10000 : 1000;
+    const timeout = 30000;
     this.connector.setTimeout(timeout);
     logger.info('Fetching taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout });
 

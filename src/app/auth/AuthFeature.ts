@@ -55,7 +55,7 @@ export class AuthFeature extends Construct {
     verIdSecret.grantRead(authFunction);
 
     props.httpApi.addRoutes({
-      path: Statics.basePath + '/login',
+      path: '/login',
       methods: [HttpMethod.GET],
       integration: new HttpLambdaIntegration('integration-login-function', loginFunction),
     });
