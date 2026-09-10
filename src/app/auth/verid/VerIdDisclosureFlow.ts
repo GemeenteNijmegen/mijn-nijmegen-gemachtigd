@@ -47,6 +47,11 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
     logger.info('VerID aanroep  finalize met', { callbackUrl });
     let disclosureResponse;
     try {
+        logger.info('VerID client secret voor finalize', {
+        start: this.clientSecret.slice(0, 6),
+        end: this.clientSecret.slice(-6),
+        length: this.clientSecret.length,
+      });
       disclosureResponse = await this.client.finalize({
         clientAuth: { client_secret: this.clientSecret },
         callbackParams: callbackUrl,
