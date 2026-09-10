@@ -1,4 +1,4 @@
-import { assertAttestedFlatV1JwtPayload, ICacheManager, VeridDisclosureClient } from '@ver-id/node-client';
+import { assertDisclosureV1JwtPayload, ICacheManager, VeridDisclosureClient } from '@ver-id/node-client';
 import { z } from 'zod';
 import { VerIdDisclosureConfig } from './VerIdConfiguration';
 import { logger } from '../../../observability/Logger';
@@ -11,10 +11,21 @@ import { AuthenticationResult } from '../AuthenticationResult';
  * Scopes staat apart in de Oath scope string, niet in de encoded jwt
  */
 const disclosureMappingSchema = z.object({
-  identifier: z.string(),
-  type: z.string(),
-  clientBsn: z.string(),
-  kvkNumber: z.string(),
+  identifier: z.object({
+    value: z.string(),
+  }),
+  type: z.object({
+    value: z.string(),
+  }),
+  clientBsn: z.object({
+    value: z.string(),
+  }),
+  kvkNumber: z.object({
+    value: z.string(),
+  }),
+  scopes: z.object({
+    value: z.array(z.string()),
+  }),
 });
 
 export class VerIdDisclosureFlow implements AuthenticationFlow {
@@ -47,11 +58,6 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
     logger.info('VerID aanroep  finalize met', { callbackUrl });
     let disclosureResponse;
     try {
-        logger.info('VerID client secret voor finalize', {
-        start: this.clientSecret.slice(0, 6),
-        end: this.clientSecret.slice(-6),
-        length: this.clientSecret.length,
-      });
       disclosureResponse = await this.client.finalize({
         clientAuth: { client_secret: this.clientSecret },
         callbackParams: callbackUrl,
@@ -67,17 +73,17 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
       throw error;
     }
     logger.info('Finalize aanroep gelukt', { ...disclosureResponse });
-    const jwt = await this.client.decode(disclosureResponse, assertAttestedFlatV1JwtPayload);
+    const jwt = await this.client.decode(disclosureResponse, assertDisclosureV1JwtPayload);
     logger.info('Decode aanroep levert jwt', { jwt });
-    const mapping = disclosureMappingSchema.parse(jwt.payload.output[0]?.mapping);
+    const mapping = disclosureMappingSchema.parse(jwt.payload.mapping);
     logger.info('Mapping aanroep gelukt', { ...mapping });
     return {
       method: 'IDWallet',
-      identifier: mapping.identifier,
-      type: mapping.type,
-      clientBsn: mapping.clientBsn,
-      kvkNumber: mapping.kvkNumber,
-      scopes: disclosureResponse.scope.split(' ').filter(Boolean),
+      identifier: mapping.identifier.value,
+      type: mapping.type.value,
+      clientBsn: mapping.clientBsn.value,
+      kvkNumber: mapping.kvkNumber.value,
+      scopes: mapping.scopes.value,
     };
   }
 }
