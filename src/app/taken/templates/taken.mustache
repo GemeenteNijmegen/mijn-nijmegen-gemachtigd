@@ -1,10 +1,21 @@
-<h1 class="utrecht-heading-1">Mijn taken</h1>
+<h1 class="utrecht-heading-1">Taken voor mijn client</h1>
 <p class="utrecht-paragraph utrecht-paragraph--lead">Bekijk de taken die u nog uit moet voeren.</p>
 <div>
     {{#timeout}}
-        <p id="taken-list">Bezig met ophalen van uw open taken…</p>
+        <p id="taken-list">Bezig met ophalen van open taken…</p>
     {{/timeout}}
-    {{#has_taken}}
-        {{{taken}}}
-    {{/has_taken}}
+    
+    {{#incomplete_results}}
+        <div class="utrecht-alert utrecht-alert--warning" role="alert">
+            <p class="utrecht-paragraph">Het is ons niet gelukt al uw taken op te halen. Hieronder ziet u de taken die we wél konden ophalen. <a class="utrecht-link utrecht-link--html-a" href="">Probeer het opnieuw</a>.</p>
+        </div>
+    {{/incomplete_results}}
+    
+    <div id="{{takenid}}" class="denhaag-action-list">
+        {{#taken}}
+            {{> taak}}
+        {{/taken}}
+    </div>
+
 </div>
+    

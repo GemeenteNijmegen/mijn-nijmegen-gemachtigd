@@ -3,6 +3,7 @@ import * as path from 'path';
 import loginErrorTemplate from '../app/auth/templates/login-error.mustache';
 import homeTemplate from '../app/home/templates/home.mustache';
 import { render } from '../app/shared/ui/render';
+import taakTemplate from '../app/taken/templates/taak.mustache';
 import takenTemplate from '../app/taken/templates/taken.mustache';
 
 // Pad vanuit preview/<page>.html terug naar src/app/static-resources/static
@@ -39,9 +40,20 @@ export async function renderAll(): Promise<void> {
     }),
     'login-error': render(loginErrorTemplate, { title: 'Inloggen mislukt', loggedIn: false }),
     'taken': render(takenTemplate, { title: 'Taken', loggedIn: true }, {
-      identifier: 'sample-machtiging-001',
-      type: 'bewindvoering',
-    })
+      taken: [{
+        title: 'Sample Taak',
+        url: '/taken/1',
+        uuid: '12345678-1234-1234-1234-123456789012',
+        einddatum: '2023-12-31',
+        is_open: true,
+        is_afgerond: false,
+        is_verwerkt: false,
+        is_gesloten: false,
+        has_attachments: false,
+      }],
+      incomplete_results: true,
+      timeout: true,
+    }, { taak: taakTemplate }),
   };
 
   for (const [name, html] of Object.entries(pages)) {

@@ -1,11 +1,11 @@
 export class Statics {
   static readonly projectName: string = 'mijn-nijmegen-gemachtigd';
   static readonly sessionTableName: string = 'mijn-nijmegen-gemachtigd-sessions';
+  static readonly basePath: string = '/gemachtigd';
 
   /**
    * Repo information
    */
-
   static readonly repository: string = 'mijn-nijmegen-gemachtigd';
   static readonly repositoryOwner: string = 'GemeenteNijmegen';
 
@@ -45,7 +45,7 @@ export class Statics {
   /**
    * SSM param with statics bucketname. Used by Mijn Nijmegen Cloudfront.
    */
-  static readonly ssmStaticResourcesBucketArn ='/cdk/mijn-nijmegen-gemachtigd/statics/bucket-arn';
+  static readonly ssmStaticResourcesBucketArn = '/cdk/mijn-nijmegen-gemachtigd/statics/bucket-arn';
 
   /**
    * VerID disclosure config (issuerUri, clientId, redirectUri) em secret.

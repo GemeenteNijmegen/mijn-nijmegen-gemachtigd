@@ -7,13 +7,14 @@ import navigationTemplate from './templates/navigation.mustache';
 import { errorReason } from '../../../observability/errorReason';
 import { logger } from '../../../observability/Logger';
 
-export function render(contentTemplate: string, page: PageModel, data: Record<string, unknown> = {}): string {
+export function render(contentTemplate: string, page: PageModel, data: Record<string, unknown> = {}, partials: Record<string, string> = {}): string {
   try {
-    const content = Mustache.render(contentTemplate, data);
+    const content = Mustache.render(contentTemplate, data, partials);
     return Mustache.render(layoutTemplate, { ...page, content }, {
       header: headerTemplate,
       navigation: navigationTemplate,
       footer: footerTemplate,
+      ...partials,
     });
   } catch (error) {
     logger.error('Pagina renderen mislukt', { title: page.title, reason: errorReason(error) });

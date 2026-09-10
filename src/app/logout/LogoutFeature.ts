@@ -4,7 +4,8 @@ import { Tracing } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import { LogoutFunction } from '../../app/logout/logout-function';
 import { SessionsTable } from '../../infrastructure/SessionsTable';
-import { createLambdaLogGroup, applyPageLambdaDefaults } from '../../infrastructure/shared/PageLambda';
+import { applyPageLambdaDefaults, createLambdaLogGroup } from '../../infrastructure/shared/PageLambda';
+import { Statics } from '../../Statics';
 
 
 interface LogoutFeatureProps {
@@ -26,7 +27,7 @@ export class LogoutFeature extends Construct {
     props.sessionsTable.table.grantReadWriteData(logoutFunction);
 
     props.httpApi.addRoutes({
-      path: '/gemachtigd/logout',
+      path: Statics.basePath + '/logout',
       methods: [HttpMethod.GET],
       integration: new HttpLambdaIntegration('integration-logout-function', logoutFunction),
     });
