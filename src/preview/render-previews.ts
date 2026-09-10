@@ -3,6 +3,7 @@ import * as path from 'path';
 import loginErrorTemplate from '../app/auth/templates/login-error.mustache';
 import homeTemplate from '../app/home/templates/home.mustache';
 import { render } from '../app/shared/ui/render';
+import takenTemplate from '../app/taken/templates/taken.mustache';
 
 // Pad vanuit preview/<page>.html terug naar src/app/static-resources/static
 const STATIC_REL = '../src/app/static-resources/static';
@@ -37,6 +38,10 @@ export async function renderAll(): Promise<void> {
       scopes: ['BWBR0015703:read', 'BWBR0015703:write', 'BWBR0003850:read'],
     }),
     'login-error': render(loginErrorTemplate, { title: 'Inloggen mislukt', loggedIn: false }),
+    'taken': render(takenTemplate, { title: 'Taken', loggedIn: true }, {
+      identifier: 'sample-machtiging-001',
+      type: 'bewindvoering',
+    })
   };
 
   for (const [name, html] of Object.entries(pages)) {

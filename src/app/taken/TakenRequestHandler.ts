@@ -1,26 +1,21 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
 import { render } from '../shared/ui/render';
-import homeTemplate from './templates/home.mustache';
+import takenTemplate from './templates/taken.mustache';
 
-export interface HomeRequestHandlerProps {
+export interface TakenRequestHandlerProps {
   session?: Session;
 }
 
-export class HomeRequestHandler {
-  constructor(private readonly props: HomeRequestHandlerProps) { }
+export class TakenRequestHandler {
+  constructor(private readonly props: TakenRequestHandlerProps) { }
 
   async handleRequest(): Promise<ApiGatewayV2Response> {
     if (!this.props.session?.isLoggedIn()) {
       return Response.redirect('/gemachtigd/login');
     }
 
-    const scopesValue: string = this.props.session.getValue('scopes') ?? '';
-    const scopes = scopesValue ? scopesValue.split(',') : [];
-
-    // Tijdelijk: toont hier letterlijk de disclosure-kenmerken voor de demo, wordt later vervangen door echte content.
-    const html = render(homeTemplate, { title: 'Home', loggedIn: true }, {
-      scopes,
+    const html = render(takenTemplate, { title: 'Taken', loggedIn: true }, {
       identifier: this.props.session.getValue('identifier'),
       type: this.props.session.getValue('type'),
       clientBsn: this.props.session.getValue('clientBsn'),

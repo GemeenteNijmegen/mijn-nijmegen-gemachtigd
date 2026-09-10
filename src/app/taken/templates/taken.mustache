@@ -1,0 +1,10 @@
+<h1 class="utrecht-heading-1">Mijn taken</h1>
+<p class="utrecht-paragraph utrecht-paragraph--lead">Bekijk de taken die u nog uit moet voeren.</p>
+<div>
+    {{#timeout}}
+        <p id="taken-list">Bezig met ophalen van uw open taken…</p>
+    {{/timeout}}
+    {{#has_taken}}
+        {{{taken}}}
+    {{/has_taken}}
+</div>

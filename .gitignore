@@ -66,6 +66,7 @@ junit.xml
 !/src/app/home/home-function.ts
 !/src/app/login/login-function.ts
 !/src/app/logout/logout-function.ts
+!/src/app/taken/taken-function.ts
 !/.github/workflows/emergency.yml
 !/.github/workflows/auto-merge.yml
 !/.nvmrc
