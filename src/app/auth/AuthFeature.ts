@@ -54,11 +54,11 @@ export class AuthFeature extends Construct {
     // alleen de callback (dus auth) mag het client secret lezen, login heeft dat nooit nodig.
     verIdSecret.grantRead(authFunction);
 
-    props.httpApi.addRoutes({
-      path: Statics.basePath + '/login',
-      methods: [HttpMethod.GET],
-      integration: new HttpLambdaIntegration('integration-login-function', loginFunction),
-    });
+    // props.httpApi.addRoutes({
+    //   path: Statics.basePath + '/login',
+    //   methods: [HttpMethod.GET],
+    //   integration: new HttpLambdaIntegration('integration-login-function', loginFunction),
+    // });
     props.httpApi.addRoutes({
       path: Statics.basePath + '/auth/verid/callback',
       methods: [HttpMethod.GET],
