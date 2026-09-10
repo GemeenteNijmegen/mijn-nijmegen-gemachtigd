@@ -1,6 +1,7 @@
 import { assertAttestedFlatV1JwtPayload, ICacheManager, VeridDisclosureClient } from '@ver-id/node-client';
 import { z } from 'zod';
 import { VerIdDisclosureConfig } from './VerIdConfiguration';
+import { logger } from '../../../observability/Logger';
 import { AuthenticationFlow } from '../AuthenticationFlow';
 import { AuthenticationResult } from '../AuthenticationResult';
 
@@ -43,13 +44,28 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
     if (!this.clientSecret) {
       throw new Error('VerID client secret ontbreekt, nodig om de disclosure af te ronden');
     }
-    const disclosureResponse = await this.client.finalize({
-      clientAuth: { client_secret: this.clientSecret },
-      callbackParams: callbackUrl,
-    });
+    logger.info('VerID aanroep  finalize met', { callbackUrl });
+    let disclosureResponse;
+    try {
+      disclosureResponse = await this.client.finalize({
+        clientAuth: { client_secret: this.clientSecret },
+        callbackParams: callbackUrl,
+      });
+    } catch (error) {
+      logger.error('VerID finalize mislukt', {
+        name: error instanceof Error ? error.name : undefined,
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+        type: (error as { type?: string }).type,
+        typeDescription: (error as { type_description?: string }).type_description,
+      });
+      throw error;
+    }
+    logger.info('Finalize aanroep gelukt', { ...disclosureResponse });
     const jwt = await this.client.decode(disclosureResponse, assertAttestedFlatV1JwtPayload);
+    logger.info('Decode aanroep levert jwt', { jwt });
     const mapping = disclosureMappingSchema.parse(jwt.payload.output[0]?.mapping);
-
+    logger.info('Mapping aanroep gelukt', { ...mapping });
     return {
       method: 'IDWallet',
       identifier: mapping.identifier,
