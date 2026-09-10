@@ -10,6 +10,7 @@ import { LoginFunction } from '../../app/login/login-function';
 import { Statics } from '../../Statics';
 import { SessionsTable } from '../SessionsTable';
 import { applyPageLambdaDefaults, createLambdaLogGroup } from '../shared/PageLambda';
+import { Duration } from 'aws-cdk-lib';
 
 interface AuthFeatureProps {
   httpApi: HttpApi;
@@ -29,6 +30,7 @@ export class AuthFeature extends Construct {
 
     const loginFunction = new LoginFunction(this, 'login-function', {
       description: 'Gemachtigd - start de Ver.ID disclosure login',
+      timeout: Duration.seconds(6),
       tracing: Tracing.ACTIVE,
       logGroup: createLambdaLogGroup(this, 'login-function'),
     });
@@ -40,6 +42,7 @@ export class AuthFeature extends Construct {
 
     const authFunction = new AuthFunction(this, 'auth-function', {
       description: 'Gemachtigd - Ver.ID disclosure callback',
+      timeout: Duration.seconds(10),
       tracing: Tracing.ACTIVE,
       logGroup: createLambdaLogGroup(this, 'auth-function'),
     });
