@@ -1,12 +1,12 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
 import { Bsn, environmentVariables } from '@gemeentenijmegen/utils';
-import { TaakSummariesResponseSchema } from './TaakSchema';
-import { EventParams } from './taken.lambda';
 import { logger } from '../../observability/Logger';
 import { Statics } from '../../Statics';
 import { render } from '../shared/ui/render';
 import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
+import { TaakSummariesResponseSchema } from './TaakSchema';
+import { EventParams } from './taken.lambda';
 import taakTemplate from './templates/taak.mustache';
 import takenTemplate from './templates/taken.mustache';
 
@@ -41,14 +41,15 @@ export class TakenRequestHandler {
     let taken;
     const isJson = params.responseType == 'json';
 
-    this.connector.setTimeout(isJson ? 10000 : 1000);
-    logger.info('Fetching taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout: this.connector.timeout });
+    const timeout = isJson ? 10000 : 1000;
+    this.connector.setTimeout(timeout);
+    logger.info('Fetching taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout });
 
     try {
       taken = await this.takenList();
     } catch (err: unknown) {
       if (err instanceof Error && err.name === 'TimeoutError') {
-        logger.error('Fetching taken timed out', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout: this.connector.timeout });
+        logger.error('Fetching taken timed out', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout });
         hasTimeout = true;
       }
     }
@@ -66,7 +67,7 @@ export class TakenRequestHandler {
       timeout: hasTimeout,
     };
     // render page
-    logger.info('Rendering taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout: this.connector.timeout, takenCount: data.taken.length });
+    logger.info('Rendering taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout, takenCount: data.taken.length });
     const html = render(takenTemplate, { title: 'Taken', loggedIn: true }, data, { taak: taakTemplate });
 
     return Response.html(html, 200, this.props.session?.getCookie());

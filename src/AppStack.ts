@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import { AuthFeature } from './app/auth/AuthFeature';
 import { HomeFeature } from './app/home/HomeFeature';
 import { LogoutFeature } from './app/logout/LogoutFeature';
+import { TakenFeature } from './app/taken/TakenFeature';
 import { Configurable } from './Configuration';
 import { ApiInfrastructure } from './infrastructure/api/ApiInfrastructure';
 import { getMijnNijmegenCloudFront } from './infrastructure/MijnNijmegenCloudFrontReference';
@@ -20,6 +21,7 @@ export class AppStack extends Stack {
     const sessionsTable = new SessionsTable(this, 'sessions-table');
     new AuthFeature(this, 'auth-feature', { httpApi: api.api, sessionsTable });
     new HomeFeature(this, 'home-feature', { httpApi: api.api, sessionsTable });
+    new TakenFeature(this, 'taken-feature', { httpApi: api.api, sessionsTable });
     new LogoutFeature(this, 'logout-feature', { httpApi: api.api, sessionsTable });
 
     const cloudFront = getMijnNijmegenCloudFront(this);
