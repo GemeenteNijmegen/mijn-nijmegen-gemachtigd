@@ -1,7 +1,7 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
-import { render } from '../shared/ui/render';
 import homeTemplate from './templates/home.mustache';
+import { render } from '../shared/ui/render';
 
 export interface HomeRequestHandlerProps {
   session?: Session;

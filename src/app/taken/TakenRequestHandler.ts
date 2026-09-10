@@ -1,13 +1,13 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
 import { environmentVariables } from '@gemeentenijmegen/utils';
-import { logger } from '../../observability/Logger';
-import { render } from '../shared/ui/render';
-import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 import { TaakSummariesResponseSchema } from './TaakSchema';
 import { EventParams } from './taken.lambda';
 import taakTemplate from './templates/taak.mustache';
 import takenTemplate from './templates/taken.mustache';
+import { logger } from '../../observability/Logger';
+import { render } from '../shared/ui/render';
+import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 
 export interface TakenRequestHandlerProps {
   session?: Session;
