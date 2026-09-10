@@ -1,10 +1,10 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { AuthFeature } from './app/auth/AuthFeature';
+import { HomeFeature } from './app/home/HomeFeature';
+import { LogoutFeature } from './app/logout/LogoutFeature';
 import { Configurable } from './Configuration';
 import { ApiInfrastructure } from './infrastructure/api/ApiInfrastructure';
-import { AuthFeature } from './infrastructure/auth/AuthFeature';
-import { HomeFeature } from './infrastructure/home/HomeFeature';
-import { LogoutFeature } from './infrastructure/logout/LogoutFeature';
 import { getMijnNijmegenCloudFront } from './infrastructure/MijnNijmegenCloudFrontReference';
 import { SessionsTable } from './infrastructure/SessionsTable';
 import { StaticResourcesBucket } from './infrastructure/StaticResourcesBucket';

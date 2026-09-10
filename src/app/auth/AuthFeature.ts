@@ -1,16 +1,16 @@
+import { Duration } from 'aws-cdk-lib';
 import { HttpApi, HttpMethod } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Tracing } from 'aws-cdk-lib/aws-lambda';
 import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
-import { AuthFunction } from '../../app/auth/auth-function';
-import { VERID_CONFIG_ENV_VAR, VERID_SECRET_ARN_ENV_VAR } from '../../app/auth/verid/VerIdConfiguration';
-import { LoginFunction } from '../../app/login/login-function';
+import { AuthFunction } from './auth-function';
+import { VERID_CONFIG_ENV_VAR, VERID_SECRET_ARN_ENV_VAR } from './verid/VerIdConfiguration';
+import { SessionsTable } from '../../infrastructure/SessionsTable';
+import { applyPageLambdaDefaults, createLambdaLogGroup } from '../../infrastructure/shared/PageLambda';
 import { Statics } from '../../Statics';
-import { SessionsTable } from '../SessionsTable';
-import { applyPageLambdaDefaults, createLambdaLogGroup } from '../shared/PageLambda';
-import { Duration } from 'aws-cdk-lib';
+import { LoginFunction } from '../login/login-function';
 
 interface AuthFeatureProps {
   httpApi: HttpApi;

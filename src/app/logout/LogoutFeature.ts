@@ -3,8 +3,9 @@ import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations
 import { Tracing } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import { LogoutFunction } from '../../app/logout/logout-function';
-import { SessionsTable } from '../SessionsTable';
-import { applyPageLambdaDefaults, createLambdaLogGroup } from '../shared/PageLambda';
+import { SessionsTable } from '../../infrastructure/SessionsTable';
+import { createLambdaLogGroup, applyPageLambdaDefaults } from '../../infrastructure/shared/PageLambda';
+
 
 interface LogoutFeatureProps {
   httpApi: HttpApi;
