@@ -6,11 +6,11 @@ import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 import { AuthFunction } from './auth-function';
-import { VERID_CONFIG_ENV_VAR, VERID_SECRET_ARN_ENV_VAR } from './verid/VerIdConfiguration';
 import { SessionsTable } from '../../infrastructure/SessionsTable';
 import { applyPageLambdaDefaults, createLambdaLogGroup } from '../../infrastructure/shared/PageLambda';
 import { Statics } from '../../Statics';
 import { LoginFunction } from '../login/login-function';
+import { VERID_CONFIG_ENV_VAR, VERID_SECRET_ARN_ENV_VAR } from './verid/VerIdConfiguration';
 
 interface AuthFeatureProps {
   httpApi: HttpApi;
@@ -55,12 +55,12 @@ export class AuthFeature extends Construct {
     verIdSecret.grantRead(authFunction);
 
     props.httpApi.addRoutes({
-      path: '/gemachtigd/login',
+      path: Statics.basePath + '/login',
       methods: [HttpMethod.GET],
       integration: new HttpLambdaIntegration('integration-login-function', loginFunction),
     });
     props.httpApi.addRoutes({
-      path: '/gemachtigd/auth/verid/callback',
+      path: Statics.basePath + '/auth/verid/callback',
       methods: [HttpMethod.GET],
       integration: new HttpLambdaIntegration('integration-auth-function', authFunction),
     });

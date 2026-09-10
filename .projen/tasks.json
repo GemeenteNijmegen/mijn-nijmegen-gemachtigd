@@ -83,6 +83,9 @@
         },
         {
           "spawn": "bundle:app/logout/logout.lambda"
+        },
+        {
+          "spawn": "bundle:app/taken/taken.lambda"
         }
       ]
     },
@@ -234,6 +237,45 @@
             "--target=node24",
             "--platform=node",
             "--outfile=assets/app/logout/logout.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text",
+            "--watch"
+          ]
+        }
+      ]
+    },
+    "bundle:app/taken/taken.lambda": {
+      "name": "bundle:app/taken/taken.lambda",
+      "description": "Create a JavaScript bundle from src/app/taken/taken.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/taken/taken.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/taken/taken.lambda/index.js",
+            "--tsconfig=test/tsconfig.json",
+            "--external:@aws-sdk/*",
+            "--loader:.mustache=text"
+          ]
+        }
+      ]
+    },
+    "bundle:app/taken/taken.lambda:watch": {
+      "name": "bundle:app/taken/taken.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/app/taken/taken.lambda.ts",
+      "steps": [
+        {
+          "execArgs": [
+            "esbuild",
+            "--bundle",
+            "src/app/taken/taken.lambda.ts",
+            "--target=node24",
+            "--platform=node",
+            "--outfile=assets/app/taken/taken.lambda/index.js",
             "--tsconfig=test/tsconfig.json",
             "--external:@aws-sdk/*",
             "--loader:.mustache=text",

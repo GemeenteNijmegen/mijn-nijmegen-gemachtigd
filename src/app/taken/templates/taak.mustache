@@ -1,0 +1,55 @@
+{{#is_open}}
+    {{^has_attachments}}
+    <a class="denhaag-action denhaag-action--single" href="{{url}}">
+        <span class="denhaag-action__row">
+            <span class="denhaag-action__content">{{title}}</span>
+        </span>
+        <span class="denhaag-action__context">
+            <span class="denhaag-action__details">
+                <span class="denhaag-action__date">voor {{einddatum}}</span>
+            </span>
+            <span class="denhaag-action__link-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg>
+            </span>
+        </span>
+    </a>
+    {{/has_attachments}}
+    {{#has_attachments}}
+    <div class="denhaag-action">
+        <span class="denhaag-action__row">
+            <span class="denhaag-action__content">{{title}}</span>
+        </span>
+        <span class="denhaag-action__context">
+            <span class="denhaag-action__details">
+                <span class="denhaag-action__date">voor {{einddatum}}</span>
+                {{#attachments}}<a class="utrecht-link utrecht-link--html-a" href="{{url}}">{{title}}</a>{{/attachments}}
+            </span>
+            <span class="denhaag-action__actions">
+                <a class="utrecht-button utrecht-button--subtle" href="{{url}}">
+                    <span class="sr-only">Taak uitvoeren: {{title}}</span>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0"/><path d="M13 18l6 -6"/><path d="M13 6l6 6"/></svg>
+                </a>
+            </span>
+        </span>
+    </div>
+    {{/has_attachments}}
+    {{/is_open}}
+
+    {{^is_open}}
+    <div class="denhaag-action">
+        <span class="denhaag-action__row">
+            <span class="denhaag-action__content">{{title}}</span>
+        </span>
+        <span class="denhaag-action__context">
+            <span class="denhaag-action__details">
+                {{#has_attachments}}{{#attachments}}<a class="utrecht-link utrecht-link--html-a" href="{{url}}">{{title}}</a>{{/attachments}}{{/has_attachments}}
+            </span>
+            <span class="denhaag-action__date">
+                {{#is_afgerond}}Ingediend{{/is_afgerond}}{{#is_verwerkt}}Verwerkt{{/is_verwerkt}}{{#is_gesloten}}Gesloten{{/is_gesloten}}
+                <span class="denhaag-action__link-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-square-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/><path d="M9 12l2 2l4 -4"/></svg>
+                </span>
+            </span>
+        </span>
+    </div>
+{{/is_open}}
