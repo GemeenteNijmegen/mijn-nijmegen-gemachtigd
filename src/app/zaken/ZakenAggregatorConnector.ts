@@ -67,7 +67,7 @@ export class ZakenAggregatorConnector {
       });
 
       if (!response.ok) {
-        logger.error(`Zakenaggregator returned HTTP ${response.status}: ${response || 'empty response'}`, { response });
+        logger.error(`Zakenaggregator returned HTTP ${response.status}: ${response || 'empty response'}`);
         throw new Error(`Zakenaggregator returned HTTP ${response.status}: ${response || 'empty response'}`);
       }
       const json = await response.json() as any;

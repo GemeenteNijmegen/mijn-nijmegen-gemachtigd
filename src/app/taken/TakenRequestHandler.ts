@@ -1,13 +1,13 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
 import { environmentVariables } from '@gemeentenijmegen/utils';
+import { logger } from '../../observability/Logger';
+import { render } from '../shared/ui/render';
+import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 import { TaakSummariesResponseSchema } from './TaakSchema';
 import { EventParams } from './taken.lambda';
 import taakTemplate from './templates/taak.mustache';
 import takenTemplate from './templates/taken.mustache';
-import { logger } from '../../observability/Logger';
-import { render } from '../shared/ui/render';
-import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 
 export interface TakenRequestHandlerProps {
   session?: Session;
@@ -75,7 +75,7 @@ export class TakenRequestHandler {
 
   private async takenList() {
     const endpoint = '/taken';
-    const clientBsn = this.props.session?.getValue('clientBsn');
+    const clientBsn = '999971803' //this.props.session?.getValue('clientBsn');
     if (!clientBsn) {
       logger.error('No clientBsn found in session');
       throw new Error('No clientBsn found in session');
