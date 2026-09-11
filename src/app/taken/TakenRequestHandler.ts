@@ -21,7 +21,7 @@ export class TakenRequestHandler {
     this.connector = new ZakenAggregatorConnector({
       baseUrl: new URL(env.ZAKEN_APIGATEWAY_BASEURL),
       apiKeySecretName: env.ZAKEN_APIGATEWAY_APIKEY,
-      timeout: 2000,
+      timeout: 30000,
     });
   }
 

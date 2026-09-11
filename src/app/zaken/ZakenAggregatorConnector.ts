@@ -65,19 +65,10 @@ export class ZakenAggregatorConnector {
         },
         signal: (this.timeout) ? AbortSignal.timeout(this.timeout) : undefined,
       });
-      if (response.headers.get('content-type') == 'application/octet-stream') {
-        logger.debug('fetch content-type octet-stream');
-        let filename = 'file.pdf';
-        logger.debug('fetch return response and filename',
-          {
-            response,
-            filename,
-          },
-        );
-        return {
-          response,
-          filename,
-        };
+
+      if (!response.ok) {
+        logger.error(`Zakenaggregator returned HTTP ${response.status}: ${response || 'empty response'}`, { response });
+        throw new Error(`Zakenaggregator returned HTTP ${response.status}: ${response || 'empty response'}`);
       }
       const json = await response.json() as any;
       if (process.env.DEBUG == 'True') {
