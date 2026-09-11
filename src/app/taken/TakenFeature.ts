@@ -9,6 +9,7 @@ import { TakenFunction } from './taken-function';
 import { SessionsTable } from '../../infrastructure/SessionsTable';
 import { applyPageLambdaDefaults, createLambdaLogGroup } from '../../infrastructure/shared/PageLambda';
 import { Statics } from '../../Statics';
+import { Duration } from 'aws-cdk-lib';
 
 interface TakenFeatureProps {
   httpApi: HttpApi;
@@ -23,6 +24,7 @@ export class TakenFeature extends Construct {
       description: 'Gemachtigd - takenpagina',
       tracing: Tracing.ACTIVE,
       logGroup: createLambdaLogGroup(this, 'taken-function'),
+      timeout: Duration.seconds(29)
     });
     applyPageLambdaDefaults(takenFunction);
     takenFunction.addEnvironment('SESSION_TABLE', props.sessionsTable.table.tableName);
