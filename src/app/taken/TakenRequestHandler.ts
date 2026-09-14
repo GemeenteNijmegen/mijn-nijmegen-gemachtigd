@@ -75,7 +75,7 @@ export class TakenRequestHandler {
 
   private async takenList() {
     const endpoint = '/taken';
-    const clientBsn = '999971803'; //this.props.session?.getValue('clientBsn');
+    const clientBsn = this.props.session?.getValue('clientBsn');
     if (!clientBsn) {
       logger.error('No clientBsn found in session');
       throw new Error('No clientBsn found in session');
