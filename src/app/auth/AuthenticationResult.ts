@@ -5,4 +5,7 @@ export interface AuthenticationResult {
   clientBsn: string;
   kvkNumber: string;
   scopes: string[];
+  clientInitials: string;
+  clientFamilyName: string;
+  clientName: string;
 }

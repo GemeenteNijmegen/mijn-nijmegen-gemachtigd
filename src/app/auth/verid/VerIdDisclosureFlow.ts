@@ -26,6 +26,16 @@ const disclosureMappingSchema = z.object({
   scopes: z.object({
     value: z.array(z.string()),
   }),
+  clientInitials: z.object ({ // Client vanuit bsn
+    value: z.string(),
+  }),
+  clientFamilyName: z.object ({ // Client vanuit bsn
+    value: z.string(),
+  }),
+  clientName: z.object ({ // Bedrijfsnaam vanuit Kvk
+    value: z.string(),
+  }),
+
 });
 
 export class VerIdDisclosureFlow implements AuthenticationFlow {
@@ -84,6 +94,9 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
       clientBsn: mapping.clientBsn.value,
       kvkNumber: mapping.kvkNumber.value,
       scopes: mapping.scopes.value,
+      clientInitials: mapping.clientInitials.value,
+      clientFamilyName: mapping.clientFamilyName.value,
+      clientName: mapping.clientName.value, // Kvk berdijf
     };
   }
 }

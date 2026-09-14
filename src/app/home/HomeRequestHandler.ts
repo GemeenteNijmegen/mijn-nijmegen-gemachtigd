@@ -25,6 +25,9 @@ export class HomeRequestHandler {
       type: this.props.session.getValue('type'),
       clientBsn: this.props.session.getValue('clientBsn'),
       kvkNumber: this.props.session.getValue('kvkNumber'),
+      clientInitials: this.props.session.getValue('clientInitials'),
+      clientFamilyName: this.props.session.getValue('clientFamilyName'),
+      clientName: this.props.session.getValue('clientName'),
     });
     return Response.html(html);
   }

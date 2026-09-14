@@ -43,6 +43,9 @@ export class AuthRequestHandler {
       clientBsn: { S: result.clientBsn },
       kvkNumber: { S: result.kvkNumber },
       scopes: { S: result.scopes.join(',') },
+      clientInitials: { S: result.clientInitials },
+      clientFamilyName: { S: result.clientFamilyName },
+      clientName: { S: result.clientName },
     });
     logger.info('Sessie aangemaakt');
     logger.info('Login afgerond');
