@@ -36,10 +36,11 @@ export async function renderAll(): Promise<void> {
       type: 'bewindvoering',
       clientBsn: '999991234',
       kvkNumber: '12345678',
-      scopes: ['BWBR0015703:read', 'BWBR0015703:write', 'BWBR0003850:read'],
+      scopes: ['SCHULDENBEWIND:read', 'SCHULDENBEWIND:write'],
       clientFamilyName: 'Jansen',
       clientName: 'Pieter de Vries',
       clientInitials: 'P. J.',
+      clientDateOfBirth: '1980-01-01',
     }),
     'login-error': render(loginErrorTemplate, { title: 'Inloggen mislukt', loggedIn: false }),
     'taken': render(takenTemplate, { title: 'Taken', loggedIn: true }, {

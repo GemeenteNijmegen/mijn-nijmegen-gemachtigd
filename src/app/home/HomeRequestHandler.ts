@@ -1,7 +1,7 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
-import homeTemplate from './templates/home.mustache';
 import { render } from '../shared/ui/render';
+import homeTemplate from './templates/home.mustache';
 
 export interface HomeRequestHandlerProps {
   session?: Session;
@@ -28,6 +28,7 @@ export class HomeRequestHandler {
       clientInitials: this.props.session.getValue('clientInitials'),
       clientFamilyName: this.props.session.getValue('clientFamilyName'),
       clientName: this.props.session.getValue('clientName'),
+      clientDateOfBirth: this.props.session.getValue('clientDateOfBirth') ?? '',
     });
     return Response.html(html);
   }
