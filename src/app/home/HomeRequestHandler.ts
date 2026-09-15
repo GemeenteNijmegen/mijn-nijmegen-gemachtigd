@@ -18,15 +18,18 @@ export class HomeRequestHandler {
     const scopesValue: string = this.props.session.getValue('scopes') ?? '';
     const scopes = scopesValue ? scopesValue.split(',') : [];
 
+    const clientInitials = this.props.session.getValue('clientInitials');
+    const clientFamilyName = this.props.session.getValue('clientFamilyName');
+
     // Tijdelijk: toont hier letterlijk de disclosure-kenmerken voor de demo, wordt later vervangen door echte content.
-    const html = render(homeTemplate, { title: 'Home', loggedIn: true }, {
+    const html = render(homeTemplate, { title: 'Home', loggedIn: true, clientInitials, clientFamilyName }, {
       scopes,
       identifier: this.props.session.getValue('identifier'),
       type: this.props.session.getValue('type'),
       clientBsn: this.props.session.getValue('clientBsn'),
       kvkNumber: this.props.session.getValue('kvkNumber'),
-      clientInitials: this.props.session.getValue('clientInitials'),
-      clientFamilyName: this.props.session.getValue('clientFamilyName'),
+      clientInitials,
+      clientFamilyName,
       clientName: this.props.session.getValue('clientName'),
     });
     return Response.html(html);

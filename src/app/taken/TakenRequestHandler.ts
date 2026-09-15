@@ -67,7 +67,12 @@ export class TakenRequestHandler {
     };
     // render page
     logger.info('Rendering taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout, takenCount: data.taken.length });
-    const html = render(takenTemplate, { title: 'Taken', loggedIn: true }, data, { taak: taakTemplate });
+    const html = render(takenTemplate, {
+      title: 'Taken',
+      loggedIn: true,
+      clientInitials: this.props.session?.getValue('clientInitials'),
+      clientFamilyName: this.props.session?.getValue('clientFamilyName'),
+    }, data, { taak: taakTemplate });
 
     return Response.html(html, 200, this.props.session?.getCookie());
 

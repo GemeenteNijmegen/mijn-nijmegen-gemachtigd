@@ -31,7 +31,7 @@ export async function renderAll(): Promise<void> {
   fs.rmSync(outDir(), { recursive: true, force: true });
 
   const pages: Record<string, string> = {
-    'home': render(homeTemplate, { title: 'Home', loggedIn: true }, {
+    'home': render(homeTemplate, { title: 'Home', loggedIn: true, clientInitials: 'P. J.', clientFamilyName: 'Jansen' }, {
       identifier: 'sample-machtiging-001',
       type: 'bewindvoering',
       clientBsn: '999991234',
@@ -42,7 +42,7 @@ export async function renderAll(): Promise<void> {
       clientInitials: 'P. J.',
     }),
     'login-error': render(loginErrorTemplate, { title: 'Inloggen mislukt', loggedIn: false }),
-    'taken': render(takenTemplate, { title: 'Taken', loggedIn: true }, {
+    'taken': render(takenTemplate, { title: 'Taken', loggedIn: true, clientInitials: 'P. J.', clientFamilyName: 'Jansen' }, {
       taken: [{
         title: 'Sample Taak',
         url: '/taken/1',
