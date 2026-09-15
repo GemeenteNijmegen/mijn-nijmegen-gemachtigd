@@ -8,4 +8,5 @@ export interface AuthenticationResult {
   clientInitials: string;
   clientFamilyName: string;
   clientName: string;
+  clientDateOfBirth?: string;
 }

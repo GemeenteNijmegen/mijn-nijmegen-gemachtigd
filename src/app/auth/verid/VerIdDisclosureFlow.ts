@@ -1,9 +1,9 @@
 import { assertDisclosureV1JwtPayload, ICacheManager, VeridDisclosureClient } from '@ver-id/node-client';
 import { z } from 'zod';
-import { VerIdDisclosureConfig } from './VerIdConfiguration';
 import { logger } from '../../../observability/Logger';
 import { AuthenticationFlow } from '../AuthenticationFlow';
 import { AuthenticationResult } from '../AuthenticationResult';
+import { VerIdDisclosureConfig } from './VerIdConfiguration';
 
 /**
  * Dit is de mapping die in VerID Studio is ingesteld voor deze disclosure flow, geen vast SDK-type.
@@ -26,16 +26,18 @@ const disclosureMappingSchema = z.object({
   scopes: z.object({
     value: z.array(z.string()),
   }),
-  clientInitials: z.object ({ // Client vanuit bsn
+  clientInitials: z.object({ // Client vanuit bsn
     value: z.string(),
   }),
-  clientFamilyName: z.object ({ // Client vanuit bsn
+  clientFamilyName: z.object({ // Client vanuit bsn
     value: z.string(),
   }),
-  clientName: z.object ({ // Bedrijfsnaam vanuit Kvk
+  clientName: z.object({ // Bedrijfsnaam vanuit Kvk
     value: z.string(),
   }),
-
+  clientDateOfBirth: z.object({ // Geboortedatum
+    value: z.string().optional().nullable(),
+  }).optional().nullable(),
 });
 
 export class VerIdDisclosureFlow implements AuthenticationFlow {
@@ -96,7 +98,8 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
       scopes: mapping.scopes.value,
       clientInitials: mapping.clientInitials.value,
       clientFamilyName: mapping.clientFamilyName.value,
-      clientName: mapping.clientName.value, // Kvk berdijf
+      clientName: mapping.clientName.value, // Kvk bedrijfnaam
+      clientDateOfBirth: mapping.clientDateOfBirth?.value, // Kvk bedrijfnaam
     };
   }
 }

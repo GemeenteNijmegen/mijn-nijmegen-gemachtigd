@@ -15,7 +15,7 @@ export interface AuthRequestHandlerProps {
 }
 
 export class AuthRequestHandler {
-  constructor(private readonly props: AuthRequestHandlerProps) {}
+  constructor(private readonly props: AuthRequestHandlerProps) { }
 
   async handleRequest(): Promise<ApiGatewayV2Response> {
     logger.info('Callback ontvangen');
@@ -46,6 +46,7 @@ export class AuthRequestHandler {
       clientInitials: { S: result.clientInitials },
       clientFamilyName: { S: result.clientFamilyName },
       clientName: { S: result.clientName },
+      clientDateOfBirth: { S: result.clientDateOfBirth ?? '' },
     });
     logger.info('Sessie aangemaakt');
     logger.info('Login afgerond');
