@@ -1,7 +1,8 @@
 import { ApiGatewayV2Response, Response } from '@gemeentenijmegen/apigateway-http/lib/V2/Response';
 import { Session } from '@gemeentenijmegen/session';
-import { render } from '../shared/ui/render';
 import homeTemplate from './templates/home.mustache';
+import { render } from '../shared/ui/render';
+import { sessionPageModel } from '../shared/ui/sessionPageModel';
 
 export interface HomeRequestHandlerProps {
   session?: Session;
@@ -18,18 +19,17 @@ export class HomeRequestHandler {
     const scopesValue: string = this.props.session.getValue('scopes') ?? '';
     const scopes = scopesValue ? scopesValue.split(',') : [];
 
-    const clientInitials = this.props.session.getValue('clientInitials');
-    const clientFamilyName = this.props.session.getValue('clientFamilyName');
-
     // Tijdelijk: toont hier letterlijk de disclosure-kenmerken voor de demo, wordt later vervangen door echte content.
-    const html = render(homeTemplate, { title: 'Home', loggedIn: true, clientInitials, clientFamilyName }, {
+    const page = sessionPageModel(this.props.session, 'Home');
+    const html = render(homeTemplate, page, {
+      clientDisplayName: page.clientDisplayName,
       scopes,
       identifier: this.props.session.getValue('identifier'),
       type: this.props.session.getValue('type'),
       clientBsn: this.props.session.getValue('clientBsn'),
       kvkNumber: this.props.session.getValue('kvkNumber'),
-      clientInitials,
-      clientFamilyName,
+      clientInitials: this.props.session.getValue('clientInitials'),
+      clientFamilyName: this.props.session.getValue('clientFamilyName'),
       clientName: this.props.session.getValue('clientName'),
       clientDateOfBirth: this.props.session.getValue('clientDateOfBirth') ?? '',
     });

@@ -11,9 +11,9 @@
       >Menu</button>
       {{/loggedIn}}
       <a class="brand" href="/gemachtigd/home">Mijn Nijmegen Gemachtigd</a>
-      {{#clientInitials}}
-      <span class="nijmegen-header-item">Namens {{clientInitials}} {{clientFamilyName}}</span>
-      {{/clientInitials}}
+      {{#clientDisplayName}}
+      <span class="nijmegen-header-item">Namens {{clientDisplayName}}</span>
+      {{/clientDisplayName}}
     </div>
     {{#loggedIn}}
     <div id="mobile-menu" class="nijmegen-header__mobile-menu">
@@ -41,9 +41,9 @@
     <div class="nijmegen-header__content--inner">
       <a class="brand" href="/gemachtigd/home">Mijn Nijmegen Gemachtigd</a>
       <nav></nav>
-      {{#clientInitials}}
-      <span class="nijmegen-header-item">Namens {{clientInitials}} {{clientFamilyName}}</span>
-      {{/clientInitials}}
+      {{#clientDisplayName}}
+      <span class="nijmegen-header-item">Namens {{clientDisplayName}}</span>
+      {{/clientDisplayName}}
       {{#loggedIn}}
       <a class="nijmegen-header-item" href="/gemachtigd/logout">Uitloggen</a>
       {{/loggedIn}}

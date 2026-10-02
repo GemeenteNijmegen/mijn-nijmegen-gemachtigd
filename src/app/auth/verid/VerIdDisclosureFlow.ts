@@ -93,13 +93,13 @@ export class VerIdDisclosureFlow implements AuthenticationFlow {
       method: 'IDWallet',
       identifier: mapping.identifier.value,
       type: mapping.type.value,
-      clientBsn: mapping.clientBsn.value,
+      clientBsn: mapping.clientBsn.value, // represented bsn
       kvkNumber: mapping.kvkNumber.value,
       scopes: mapping.scopes.value,
       clientInitials: mapping.clientInitials.value,
       clientFamilyName: mapping.clientFamilyName.value,
       clientName: mapping.clientName.value, // Kvk bedrijfnaam
-      clientDateOfBirth: mapping.clientDateOfBirth?.value, // Kvk bedrijfnaam
+      clientDateOfBirth: mapping.clientDateOfBirth?.value ?? undefined, // represented date of birth
     };
   }
 }

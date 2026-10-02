@@ -53,6 +53,7 @@ Ver.ID zet de gegevens uit verschillende wallets om naar dezelfde velden:
 * clientBsn
 * kvkNumber
 * scopes
+* clientDateOfBirth
 
 Gemachtigd hoeft daardoor niet te weten hoe Yivi of NL Wallet deze gegevens intern opslaat.
 

@@ -7,6 +7,7 @@ import taakTemplate from './templates/taak.mustache';
 import takenTemplate from './templates/taken.mustache';
 import { logger } from '../../observability/Logger';
 import { render } from '../shared/ui/render';
+import { sessionPageModel } from '../shared/ui/sessionPageModel';
 import { ZakenAggregatorConnector } from '../zaken/ZakenAggregatorConnector';
 
 export interface TakenRequestHandlerProps {
@@ -30,12 +31,12 @@ export class TakenRequestHandler {
       return Response.redirect('/login');
     }
     if (!params.taakId) {
-      return this.list(params);
+      return this.list(params, this.props.session);
     }
     return Response.error(400);
   }
 
-  async list(params: EventParams) {
+  async list(params: EventParams, session: Session) {
     let hasTimeout = false;
     let taken;
     const isJson = params.responseType == 'json';
@@ -67,12 +68,7 @@ export class TakenRequestHandler {
     };
     // render page
     logger.info('Rendering taken', { isJson: isJson, taakId: params.taakId, xsrfToken: params.xsrfToken, timeout, takenCount: data.taken.length });
-    const html = render(takenTemplate, {
-      title: 'Taken',
-      loggedIn: true,
-      clientInitials: this.props.session?.getValue('clientInitials'),
-      clientFamilyName: this.props.session?.getValue('clientFamilyName'),
-    }, data, { taak: taakTemplate });
+    const html = render(takenTemplate, sessionPageModel(session, 'Taken'), data, { taak: taakTemplate });
 
     return Response.html(html, 200, this.props.session?.getCookie());
 
