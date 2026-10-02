@@ -9,5 +9,9 @@
     "BWBR0015703:payout",
     "BWBR0015703:correspondence",
     "BWBR0003850:read"
-  ]
+  ],
+  "clientInitials": "J.D.",
+  "clientFamilyName": "Doe",
+  "clientDateOfBirth": "1990-01-01",
+  "clientName": "John Doe"
 }
